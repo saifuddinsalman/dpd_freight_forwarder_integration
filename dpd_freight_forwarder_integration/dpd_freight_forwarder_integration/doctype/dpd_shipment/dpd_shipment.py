@@ -143,7 +143,7 @@ def post_shipment_request(self):
 				}
 				headers = {"Content-Type": "application/json"}
 				payload = post_request_data
-				response_json = make_call(f"{dpd_settings_values.get("shipment_service_endpoint")}", "POST", headers, payload)
+				response_json = make_call(cstr(dpd_settings_values.get("shipment_service_endpoint")), "POST", headers, payload)
 				response_log_filters['timestamp'] = frappe.utils.now()
 				if response_json:
 					response_log_filters['response_status'] = "Success"

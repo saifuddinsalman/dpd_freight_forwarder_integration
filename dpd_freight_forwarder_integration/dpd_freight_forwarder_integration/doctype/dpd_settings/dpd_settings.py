@@ -52,7 +52,7 @@ def test_connection(doc=None):
             doc.auth_token = ""
             doc.token_expires_on = None
             payload = {"delisID": doc.delis_id, "password": doc.password, "messageLanguage": doc.message_language}
-            response_json = make_call(f"{doc.rest_api_base_url}", "POST", headers, payload)
+            response_json = make_call(cstr(doc.rest_api_base_url), "POST", headers, payload)
             timestamp = frappe.utils.now()
             if response_json:
                 filters = {
