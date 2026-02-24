@@ -62,8 +62,7 @@ def test_connection(doc=None):
                     "response_json": response_json,
                     "timestamp": timestamp,
                     "error_message": None,
-                    "reference_document": doc.doctype,
-                    "reference_record": doc.name
+                    "dpd_settings": True
                 }
                 response_object = response_json.get("getAuthResponse").get("return")
                 token = response_object.get("authToken")
@@ -92,7 +91,7 @@ def test_connection(doc=None):
 
 def create_api_log(filters=None):
     if filters:
-        if filters.get("method") and filters.get("response_status") and filters.get("request_payload") and filters.get("response_json") and filters.get("timestamp") and filters.get("reference_document") and filters.get("reference_record"):    
+        if filters.get("method") and filters.get("response_status") and filters.get("request_payload") and filters.get("response_json") and filters.get("timestamp"):    
             try:
                 doc = frappe.new_doc("DPD API Log")
                 doc.method = filters.get("method")
@@ -100,8 +99,11 @@ def create_api_log(filters=None):
                 doc.request_payload = json.dumps(filters.get("request_payload"))
                 doc.response_payload = json.dumps(filters.get("response_json"))
                 doc.timestamp = filters.get("timestamp")
-                doc.reference_document = filters.get("reference_document")
-                doc.reference_record = filters.get("reference_record")
+                if filters.get("reference_document") and filters.get("reference_record"):
+                    doc.reference_document = filters.get("reference_document")
+                    doc.reference_record = filters.get("reference_record")
+                if filters.get("dpd_settings"):
+                    doc.dpd_settings = 1
                 if filters.get("error_message"):
                     doc.error_message = filters.get("error_message")
                 doc.flags.ignore_permissions = True

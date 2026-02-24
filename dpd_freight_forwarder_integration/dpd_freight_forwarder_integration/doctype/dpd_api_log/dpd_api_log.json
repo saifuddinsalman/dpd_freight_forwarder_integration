@@ -15,7 +15,8 @@
   "timestamp",
   "naming_series",
   "reference_document",
-  "reference_record"
+  "reference_record",
+  "dpd_settings"
  ],
  "fields": [
   {
@@ -80,12 +81,20 @@
    "fieldtype": "Dynamic Link",
    "label": "Reference Record",
    "options": "reference_document"
+  },
+  {
+   "default": "0",
+   "fieldname": "dpd_settings",
+   "fieldtype": "Check",
+   "label": "DPD Settings",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
+ "in_create": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-20 15:20:41.828704",
+ "modified": "2026-02-24 14:40:57.917184",
  "modified_by": "Administrator",
  "module": "DPD Freight Forwarder Integration",
  "name": "DPD API Log",
